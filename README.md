@@ -25,7 +25,7 @@ let tabsOptions = {
 * destroy()
 
 ## Event Callbacks
-* onTabChange()
+* onTabChange(newTabIndex, oldTabIndex)
 
 ## Revision History
 * **1.0.0:** First commit.
