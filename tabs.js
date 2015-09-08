@@ -6,7 +6,6 @@ let tabs = function(element, options) {
 	let settings,
 		triggerEls = [],
 		sectionEls = [],
-		tabsDestroyed = true,
 		initialTabSet = false,
 		defaults = {
 			activeClass: 'is-active',
@@ -22,7 +21,6 @@ let tabs = function(element, options) {
 	function init() {
 		if (element) {
 			settings = objectUtils.extend(this, defaults, options);
-			tabsDestroyed = false;
 			triggerEls = Array.prototype.slice.call(element.querySelectorAll('.' + settings.triggerClass));
 			triggerEls.forEach(function(triggerEl, index) {
 				addSection(triggerEl, index);
@@ -44,35 +42,33 @@ let tabs = function(element, options) {
 	};
 
 	function bindEvents() {
-		document.addEventListener('click', function(e) {
-			let clickedEl = domUtils.isDescendentByClass(settings.triggerClass, e.target);
-			if ((tabsDestroyed === false) && (clickedEl !== false)) {
-				e.preventDefault();
-				onTriggerClick(clickedEl);
-			}
-		});
+		document.addEventListener('click', onTriggerClick);
 	};
 
-	function onTriggerClick(clickedEl) {
-		let clickedIndex = clickedEl.getAttribute(settings.indexName),
-			oldIndex = null;
-		triggerEls.forEach(function(trigger, index) {
-			if (trigger.classList.contains(settings.activeClass)) {
-				oldIndex = index;
-			}
-			[trigger, trigger.tabTargetEl].forEach(function(el) {
-				if (index !== parseInt(clickedIndex)) {
-					el.classList.remove(settings.activeClass);
-				} else {
-					el.classList.add(settings.activeClass);
+	function onTriggerClick(e) {
+		let clickedEl = domUtils.isDescendentByClass(settings.triggerClass, e.target);
+		if (clickedEl !== false) {
+			e.preventDefault();
+			let clickedIndex = clickedEl.getAttribute(settings.indexName),
+				oldIndex = null;
+			triggerEls.forEach(function(trigger, index) {
+				if (trigger.classList.contains(settings.activeClass)) {
+					oldIndex = index;
 				}
+				[trigger, trigger.tabTargetEl].forEach(function(el) {
+					if (index !== parseInt(clickedIndex)) {
+						el.classList.remove(settings.activeClass);
+					} else {
+						el.classList.add(settings.activeClass);
+					}
+				});
 			});
-		});
-		if (settings.onTabChange !== null) {
-			settings.onTabChange({
-				'newTabIndex': parseInt(clickedIndex),
-				'oldTabIndex': oldIndex
-			});
+			if (settings.onTabChange !== null) {
+				settings.onTabChange({
+					'newTabIndex': parseInt(clickedIndex),
+					'oldTabIndex': oldIndex
+				});
+			}
 		}
 	};
 
@@ -96,7 +92,7 @@ let tabs = function(element, options) {
 
 	function destroy() {
 		triggerEls.forEach(function(triggerEl) {
-			triggerEl.removeEventListener('click', onTriggerClick);
+			document.removeEventListener('click', onTriggerClick);
 			triggerEl.classList.remove(settings.activeClass);
 		});
 		sectionEls.forEach(function(sectionEl) {
@@ -104,7 +100,6 @@ let tabs = function(element, options) {
 		});
 		triggerEls = [];
 		sectionEls = [];
-		tabsDestroyed = true;
 	};
 
 	init();
