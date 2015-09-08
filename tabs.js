@@ -72,7 +72,7 @@ let tabs = function(element, options) {
 		}
 	};
 
-	function addTriggerEl(triggerEl) {
+	function addTrigger(triggerEl) {
 		triggerEls.push(triggerEl);
 		addSection(triggerEl, triggerEls.length);
 	};
@@ -91,8 +91,8 @@ let tabs = function(element, options) {
 	};
 
 	function destroy() {
+		document.removeEventListener('click', onTriggerClick);
 		triggerEls.forEach(function(triggerEl) {
-			document.removeEventListener('click', onTriggerClick);
 			triggerEl.classList.remove(settings.activeClass);
 		});
 		sectionEls.forEach(function(sectionEl) {
@@ -105,7 +105,7 @@ let tabs = function(element, options) {
 	init();
 
 	return {
-		addTriggerEl: addTriggerEl,
+		addTrigger: addTrigger,
 		destroy: destroy
 	};
 
