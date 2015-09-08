@@ -3,12 +3,12 @@ A tabs plugin, written in ES6 module syntax.
 
 ## Sample Usage
 ``` javascript
-tabsInst = tabs(tabsEl, tabOptions);
+let tabsInst = tabs(tabsEl, tabsOptions);
 ```
 
 ## Settings
 ``` javascript
-let tabOptions = {
+let tabsOptions = {
 	'activeClass': 'is-active',
 	'triggerClass': 'tabs__trigger',
 	'sectionClass': 'tabs__section',
