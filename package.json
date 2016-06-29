@@ -1,6 +1,6 @@
 {
     "name": "tabs",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A tabs plugin, written in ES6 module syntax.",
     "keywords": [
     	"tabs",
