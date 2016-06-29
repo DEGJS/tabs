@@ -1,11 +1,38 @@
 {
-	"name": "tabs",
-	"jspm": {
-		"dependencies": {
-			"domUtils": "github:DEGJS/domUtils@master",
-			"objectUtils": "github:DEGJS/objectUtils@master"
-		},
-		"format": "es6",
-  		"registry": "jspm"
-	}
+    "name": "tabs",
+    "version": "1.0.0",
+    "description": "A tabs plugin, written in ES6 module syntax.",
+    "keywords": [
+    	"tabs",
+        "DEGJS"
+    ],
+    "author": {
+        "name": "Ryan Heap",
+        "email": "rheap@degdigital.com"
+    },
+    "contributors": [
+        {
+            "name": "Aaron Ladage",
+            "email": "aladage@degdigital.com",
+            "url": "http://aaronladage.com"
+        }
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DEGJS/tabs.git"
+    },
+    "bugs": "https://github.com/DEGJS/tabs/issues",
+    "jspm": {
+        "registry": "jspm",
+        "format": "es6",
+        "main": "tabs.js",
+        "directories": {
+            "lib": "src"
+        },
+        "dependencies": {
+            "DEGJS/domUtils": "github:DEGJS/domUtils@^1.0.2",
+			"DEGJS/objectUtils": "github:DEGJS/objectUtils@^1.0.0"
+        }
+    }
 }
