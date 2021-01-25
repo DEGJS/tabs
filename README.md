@@ -1,6 +1,8 @@
 # Tabs
 A tabs plugin, written in ES6 module syntax.
 
+**THIS REPOSITORY IS NO LONGER MAINTAINED**
+
 ## Sample Usage
 ``` javascript
 let tabsInst = tabs(tabsEl, tabsOptions);
